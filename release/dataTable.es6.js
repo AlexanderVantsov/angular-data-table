@@ -1884,7 +1884,8 @@ function HeaderDirective($timeout){
       columnWidths: '=',
       onSort: '&',
       onResize: '&',
-      onCheckboxChange: '&'
+      onCheckboxChange: '&',
+      allRowsSelected: '='
     },
     template: `
       <div class="dt-header" ng-style="header.styles()">
@@ -1902,7 +1903,7 @@ function HeaderDirective($timeout){
               options="header.options"
               sort-type="header.options.sortType"
               on-resize="header.onResized(column, width)"
-              selected="header.isSelected()"
+              selected="header.allRowsSelected"
               column="column">
             </dt-header-cell>
           </div>
@@ -1915,7 +1916,7 @@ function HeaderDirective($timeout){
               on-checkbox-change="header.onCheckboxChanged()"
               on-sort="header.onSorted(column)"
               sort-type="header.options.sortType"
-              selected="header.isSelected()"
+              selected="header.allRowsSelected"
               on-resize="header.onResized(column, width)"
               options="header.options"
               column="column">
@@ -1931,7 +1932,7 @@ function HeaderDirective($timeout){
               on-checkbox-change="header.onCheckboxChanged()"
               on-sort="header.onSorted(column)"
               sort-type="header.options.sortType"
-              selected="header.isSelected()"
+              selected="header.allRowsSelected"
               on-resize="header.onResized(column, width)"
               options="header.options"
               column="column">
@@ -2885,7 +2886,7 @@ class DataTableController {
    * @return {Boolean} if all selected
    */
   isAllRowsSelected(){
-    if(this.rows) return false;
+    if(!this.rows.length) return false;
     return this.selected.length === this.rows.length;
   }
 
@@ -2980,6 +2981,7 @@ function DataTableDirective($window, $timeout, $parse){
                      ng-if="dt.options.headerHeight"
                      on-resize="dt.onResized(column, width)"
                      selected="dt.isAllRowsSelected()"
+                     all-rows-selected="dt.isAllRowsSelected()"
                      on-sort="dt.onSorted()">
           </dt-header>
           <dt-body rows="dt.rows"

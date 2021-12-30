@@ -249,7 +249,7 @@ export class DataTableController {
    * @return {Boolean} if all selected
    */
   isAllRowsSelected(){
-    if(this.rows) return false;
+    if(!this.rows.length) return false;
     return this.selected.length === this.rows.length;
   }
 

@@ -32,6 +32,10 @@ var banner = ['/**',
   ' * @version v<%= pkg.version %>',
   ' * @link <%= pkg.homepage %>',
   ' * @license <%= pkg.license %>',
+  ' * ',
+  ' * This is modified version of the library',
+  ' * Fixed bug with header checkbox state',
+  ' * @link https://github.com/AlexanderVantsov/angular-data-table',
   ' */',
   ''].join('\n');
 
